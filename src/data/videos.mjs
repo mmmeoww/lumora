@@ -1,4 +1,5 @@
 // Видеотека. Пока реальных роликов нет, поэтому embed пустой и страница честно показывает «скоро».
+// Свой файл: положите mp4 в src/assets/video/ и укажите file: 'имя.mp4' (embed тогда не нужен).
 // Когда ролик будет готов, вставьте в embed ссылку вида https://rutube.ru/play/embed/ID
 // или https://www.youtube-nocookie.com/embed/ID и поставьте status: 'published'.
 export const videos = [
@@ -8,8 +9,9 @@ export const videos = [
     category: 'О проекте',
     description: 'Короткий ролик о том, как личная история превращается в приключение: от первой идеи до совместного прохождения.',
     embed: '',
+    file: 'chto-takoe-lumora.mp4',
     duration: '',
-    status: 'planned',
+    status: 'published',
     article: 'kak-prevratit-istoriyu-v-igru',
     adventure: 'doroga-domoy',
   },

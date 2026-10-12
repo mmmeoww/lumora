@@ -124,8 +124,10 @@ for (const v of videos) {
     title: v.title, description: v.description,
     crumbs: [['Главная', ''], ['Видео', 'videos/'], [v.title]],
     render: (root) => `<article class="section section--page"><div class="container container--article">
-<header class="page-head"><p class="tags"><span class="tag tag--gold">${esc(v.category)}</span>${v.embed ? '' : '<span class="tag">Скоро</span>'}</p><h1>${esc(v.title)}</h1><p class="lead">${esc(v.description)}</p></header>
-${v.embed
+<header class="page-head"><p class="tags"><span class="tag tag--gold">${esc(v.category)}</span>${v.embed || v.file ? '' : '<span class="tag">Скоро</span>'}</p><h1>${esc(v.title)}</h1><p class="lead">${esc(v.description)}</p></header>
+${v.file
+    ? `<div class="player"><video controls preload="metadata" playsinline title="${esc(v.title)}" src="${root}assets/video/${esc(v.file)}"></video></div>`
+    : v.embed
     ? `<div class="player" data-player data-embed="${esc(v.embed)}" data-title="${esc(v.title)}">${cover(adv?.motif || 'door', { label: '', seed: v.slug })}<button type="button" class="player__btn" aria-label="Смотреть видео «${esc(v.title)}»"><span class="play"></span></button></div>`
     : `<div class="player player--soon">${cover(adv?.motif || 'door', { label: '', seed: v.slug })}<p class="player__note">Видео появится здесь после публикации</p></div>`}
 <h2>Связанные материалы</h2>

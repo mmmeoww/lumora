@@ -30,7 +30,7 @@ project-docs/           документы для сдачи (структура
 Правьте файлы в `src/data/` и пересобирайте сайт (на GitHub это происходит автоматически при push).
 - **Статья:** новый объект в `articles.mjs` (slug латиницей, `body` — HTML).
 - **Приключение:** объект в `adventures.mjs`, `motif`: `road | door | train | city | island | letter`.
-- **Видео:** в `videos.mjs` укажите `embed` (ссылка на встраивание RuTube/YouTube) и `status: 'published'`.
+- **Видео:** в `videos.mjs` укажите `embed` (ссылка на встраивание RuTube/YouTube) и `status: 'published'`. Или положите mp4 в `src/assets/video/` и укажите `file: 'имя.mp4'`.
 - **Вопрос FAQ:** объект в `faq.mjs`.
 
 ## Публикация на GitHub Pages

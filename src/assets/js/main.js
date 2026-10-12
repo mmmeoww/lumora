@@ -127,6 +127,8 @@
     });
   });
 
+  $$('.player video').forEach((v) => v.addEventListener('play', () => goal('video_play'), { once: true }));
+
   /* ---------- Формы ---------- */
   const messages = {
     valueMissing: 'Заполните это поле.',

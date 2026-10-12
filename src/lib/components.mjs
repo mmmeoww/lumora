@@ -45,7 +45,7 @@ export function articleCard(a, root) {
 }
 
 export function videoCard(v, root, motif = 'door') {
-  const soon = !v.embed;
+  const soon = !v.embed && !v.file;
   return `<article class="card video-card" data-item data-title="${esc(v.title + ' ' + v.description)}" data-genre="${esc(v.category)}">
 <a class="card__media card__media--video" href="${root}videos/${v.slug}/" tabindex="-1" aria-hidden="true">${cover(motif, { label: '', seed: v.slug })}<span class="play" aria-hidden="true"></span></a>
 <div class="card__body">
