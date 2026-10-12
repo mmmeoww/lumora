@@ -1,0 +1,49 @@
+name: Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - id: pages
+        uses: actions/configure-pages@v5
+      - name: Build
+        run: npm run build
+        env:
+          # base_url — адрес сайта на Pages (учитывает репозиторий и собственный домен)
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
+          # Необязательные значения: задайте в Settings → Secrets and variables → Actions → Variables
+          CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
+          FORM_ENDPOINT: ${{ vars.FORM_ENDPOINT }}
+          METRIKA_ID: ${{ vars.METRIKA_ID }}
+          YANDEX_VERIFICATION: ${{ vars.YANDEX_VERIFICATION }}
+      - name: Check
+        run: node scripts/check.mjs
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
